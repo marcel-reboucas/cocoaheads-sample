@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
+
+typedef void (^LocationBlock)(CLLocation *);
 
 @interface ViewController : UIViewController
 

@@ -11,6 +11,7 @@ target 'cocoaheads-sample' do
     inherit! :search_paths
     
     pod 'OCMock'
+    pod 'KIF'
   end
 
 end
