@@ -10,6 +10,9 @@ import XCTest
 
 class ViewControllerTests: XCTestCase {
     
+    // *************************
+    // ** Simple XCTest usage **
+    // *************************
     func testViewDidLoad_SetsLabels_Always() {
         let name = "Andy"
         let email = "andy@notanemail.com"
@@ -19,6 +22,8 @@ class ViewControllerTests: XCTestCase {
         let toTest = ViewController()
         toTest.viewDidLoad()
         
+        // Acessing the private properties requires an Obj-C file
+        // exposing them for Swift to use.
         XCTAssertEqual(name, toTest.nameLabel.text)
         XCTAssertEqual(email, toTest.emailLabel.text)
     }

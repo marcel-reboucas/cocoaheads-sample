@@ -23,7 +23,12 @@
 
 @implementation ViewControllerTests
 
-- (void)testViewDidLoad_SetsLabels_Always {
+// *************************
+// ** Simple XCTest usage **
+// *************************
+
+- (void)testViewDidLoad_SetsLabels_Always
+{
     NSString *name = @"Andy";
     NSString *email = @"andyo@notanemail.com";
     [[NSUserDefaults standardUserDefaults] setObject:name forKey:@"name"];

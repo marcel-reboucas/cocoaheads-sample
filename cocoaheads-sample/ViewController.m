@@ -7,19 +7,20 @@
 //
 
 #import "ViewController.h"
-#import "ThreadWait.h"
 
-@interface ViewController ()<CLLocationManagerDelegate>
+@interface ViewController ()
 
 @property (strong, nonatomic) UILabel *nameLabel;
 @property (strong, nonatomic) UILabel *emailLabel;
-@property (strong, nonatomic) CLLocationManager *manager;
-@property (strong, nonatomic) CLLocation *lastLocation;
-@property (strong, nonatomic) ThreadWait *waiter;
 
 @end
 
 @implementation ViewController
+
+// *************************
+// ** Simple viewDidLoad  **
+// ** Obj-C / Swift Tests **
+// *************************
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -32,40 +33,6 @@
     
     self.nameLabel.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"name"];
     self.emailLabel.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"email"];
-    [self.manager requestAlwaysAuthorization];
-    self.manager.delegate = self;
 }
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
-{
-    if (locations.count > 0) {
-        self.lastLocation = locations.firstObject;
-    }
-    if (self.waiter != nil){
-        [self.waiter stopWait];
-    }
-}
-
-- (void)requestLocationUpdateAsync:(LocationBlock)completionBlock
-{
-    // É feio e eu sei, mas é só um exemplo :P
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        self.waiter = [[ThreadWait alloc] init];
-        [self.manager requestLocation];
-        [self.waiter wait];
-        self.waiter = nil;
-        completionBlock(self.lastLocation);
-    });
-}
-
-- (CLLocation *)requestLocationUpdateSync
-{
-    self.waiter = [[ThreadWait alloc] init];
-    [self.manager requestLocation];
-    [self.waiter wait];
-    self.waiter = nil;
-    return self.lastLocation;
-}
-
 
 @end
