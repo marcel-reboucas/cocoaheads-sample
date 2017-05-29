@@ -11,6 +11,16 @@
 
 typedef void (^LocationBlock)(CLLocation *);
 
+@protocol LocationListener <NSObject>
+
+-(void)receivedLocation:(CLLocation *)location;
+
+@end
+
 @interface LocationManager : NSObject
+
+@property (nonatomic, weak) NSObject<LocationListener> *locationListener;
+- (CLLocation *)requestLocationUpdateSync;
+- (void)requestLocationUpdateAsync:(LocationBlock)completionBlock;
 
 @end

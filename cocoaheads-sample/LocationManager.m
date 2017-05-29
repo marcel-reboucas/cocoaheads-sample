@@ -24,6 +24,7 @@
     self = [super init];
     
     if (self) {
+        self.manager = [[CLLocationManager alloc] init];
         [self.manager requestAlwaysAuthorization];
         self.manager.delegate = self;
     }
@@ -34,17 +35,30 @@
 {
     if (locations.count > 0) {
         self.lastLocation = locations.firstObject;
+        [self.locationListener receivedLocation:self.lastLocation];
     }
     if (self.waiter != nil){
         [self.waiter stopWait];
     }
 }
 
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(nonnull NSError *)error
+{
+    NSLog(@"FALHOU! MAS QUE DUREZA!");
+}
+
 - (void)requestLocationUpdateAsync:(LocationBlock)completionBlock
 {
+    if (![self isAuthorized]) {
+        if (completionBlock) {
+            completionBlock(nil);
+        }
+        return;
+    }
     // É feio e eu sei, mas é só um exemplo :P
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        self.waiter = [[ThreadWait alloc] init];
+        // mockable init
+        self.waiter = [[ThreadWait alloc] initDefault];
         [self.manager requestLocation];
         [self.waiter wait];
         self.waiter = nil;
@@ -56,7 +70,11 @@
 
 - (CLLocation *)requestLocationUpdateSync
 {
-    self.waiter = [[ThreadWait alloc] init];
+    if (![self isAuthorized]) {
+        return nil;
+    }
+    // mockable init
+    self.waiter = [[ThreadWait alloc] initDefault];
     [self.manager requestLocation];
     [self.waiter wait];
     self.waiter = nil;
@@ -100,10 +118,17 @@
         case kCLAuthorizationStatusAuthorizedWhenInUse:
             return @"Authorized When In Use";
         case kCLAuthorizationStatusRestricted:
-            return @"Authorized but Restricted";
+            return @"Not Authorized";
         default:
             return @"Not Authorized";
     }
+}
+
+-(BOOL)isAuthorized
+{
+    CLAuthorizationStatus status = [self authorizationStatus];
+    return status == kCLAuthorizationStatusAuthorizedAlways ||
+    status == kCLAuthorizationStatusAuthorizedWhenInUse;
 }
 
 @end

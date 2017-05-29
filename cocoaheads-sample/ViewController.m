@@ -7,11 +7,13 @@
 //
 
 #import "ViewController.h"
+#import "LocationManager.h"
 
 @interface ViewController ()
 
 @property (strong, nonatomic) UILabel *nameLabel;
 @property (strong, nonatomic) UILabel *emailLabel;
+@property (strong, nonatomic) LocationManager *locationManager;
 
 @end
 
@@ -33,6 +35,9 @@
     
     self.nameLabel.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"name"];
     self.emailLabel.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"email"];
+    
+    self.locationManager = [[LocationManager alloc] init];
+    
 }
 
 @end
