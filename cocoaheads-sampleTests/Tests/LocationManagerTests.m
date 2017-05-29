@@ -10,8 +10,19 @@
 #import "LocationManager.h"
 #import "ThreadWait.h"
 #import "OCMock.h"
+#import "KIF.h"
+#import "Utils.h"
 
-typedef void (^ILMRunBlock)(void);
+#define WAIT_FOR_AUTHRIZATION \
+CLAuthorizationStatus auth = [CLLocationManager authorizationStatus]; \
+CLLocationManager *authManager = [[CLLocationManager alloc] init];    \
+while (auth == kCLAuthorizationStatusNotDetermined) {                 \
+NSLog(@"Please allow location acess");                           \
+[authManager requestAlwaysAuthorization];                         \
+[Utils unblockingMainThreadSleep:1 forTestClass:self];                               \
+[tester acknowledgeSystemAlert];                                  \
+auth = [CLLocationManager authorizationStatus];                   \
+}
 
 // Private Category Trick to expose private properties for testing
 @interface LocationManager (Test)
@@ -92,7 +103,8 @@ typedef void (^ILMRunBlock)(void);
 // Is this an good unit test ?
 - (void)testRequestLocationSync
 {
-    [self backgroundTest:^{
+    WAIT_FOR_AUTHRIZATION;
+    [Utils backgroundTest:^{
         OCMStub([self.managerMock isAuthorized]).andReturn(YES);
         CLLocation *location = [self.manager requestLocationUpdateSync];
         XCTAssertNotNil(location);
@@ -122,21 +134,6 @@ typedef void (^ILMRunBlock)(void);
     
     CLLocation *location = [self.managerMock requestLocationUpdateSync];
     XCTAssertEqualObjects(testLocation,location);
-}
-
-// Auxiliar method
-- (void)backgroundTest:(ILMRunBlock)block
-{
-    __block BOOL finishTest = NO;
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
-    dispatch_async(queue, ^{
-        block();
-        finishTest = YES;
-    });
-    
-    while (!finishTest) {
-        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
-    }
 }
 
 @end

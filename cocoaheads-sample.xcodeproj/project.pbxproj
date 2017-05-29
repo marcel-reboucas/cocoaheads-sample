@@ -21,6 +21,7 @@
 		318B43F993D928D7E58F8A20 /* libPods-cocoaheads-sampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9034FE08A9B7ECF5169F6E1D /* libPods-cocoaheads-sampleTests.a */; };
 		A55385DB89A7EADBF7E2B233 /* libPods-cocoaheads-sample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 71CA978E9B0A42B77359F01B /* libPods-cocoaheads-sample.a */; };
 		FE751BA61ED8C53000C142C6 /* ThreadWait.m in Sources */ = {isa = PBXBuildFile; fileRef = FE751BA51ED8C53000C142C6 /* ThreadWait.m */; };
+		FEF1C6BE1EDC5BE7006C0231 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = FEF1C6BD1EDC5BE7006C0231 /* Utils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,8 @@
 		E4DA382D2275A31FBD556AA9 /* Pods-cocoaheads-sample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cocoaheads-sample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cocoaheads-sample/Pods-cocoaheads-sample.debug.xcconfig"; sourceTree = "<group>"; };
 		FE751BA41ED8C53000C142C6 /* ThreadWait.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreadWait.h; sourceTree = "<group>"; };
 		FE751BA51ED8C53000C142C6 /* ThreadWait.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreadWait.m; sourceTree = "<group>"; };
+		FEF1C6BC1EDC5BE7006C0231 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utils.h; path = AuxiliarClasses/Utils.h; sourceTree = "<group>"; };
+		FEF1C6BD1EDC5BE7006C0231 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Utils.m; path = AuxiliarClasses/Utils.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +189,7 @@
 		1FBD0E2D1ED4EDB4006C32F6 /* cocoaheads-sampleTests */ = {
 			isa = PBXGroup;
 			children = (
+				FEF1C6BB1EDC5B91006C0231 /* Auxiliar Classes */,
 				1F32A2BF1ED4F16400321CE8 /* Supporting Files */,
 				1F32A2B81ED4F06500321CE8 /* TestingHeaders */,
 				1F32A2B71ED4F00500321CE8 /* Tests */,
@@ -220,6 +224,15 @@
 				FE751BA51ED8C53000C142C6 /* ThreadWait.m */,
 			);
 			name = Util;
+			sourceTree = "<group>";
+		};
+		FEF1C6BB1EDC5B91006C0231 /* Auxiliar Classes */ = {
+			isa = PBXGroup;
+			children = (
+				FEF1C6BC1EDC5BE7006C0231 /* Utils.h */,
+				FEF1C6BD1EDC5BE7006C0231 /* Utils.m */,
+			);
+			name = "Auxiliar Classes";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -441,6 +454,7 @@
 				1F32A2B61ED4EFFC00321CE8 /* ViewControllerTests.swift in Sources */,
 				1F32A2C41ED4F47E00321CE8 /* AsynchronousTests.swift in Sources */,
 				1F32A2B31ED4EF8800321CE8 /* ViewControllerTests.m in Sources */,
+				FEF1C6BE1EDC5BE7006C0231 /* Utils.m in Sources */,
 				1F00B9AA1EDB01A400345E1D /* LocationManagerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
