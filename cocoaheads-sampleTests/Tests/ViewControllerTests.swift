@@ -2,7 +2,6 @@
 //  ViewControllerTests.swift
 //  cocoaheads-sample
 //
-//  Created by Marcel de Siqueira Campos Rebouças on 5/23/17.
 //  Copyright © 2017 inlocomedia. All rights reserved.
 //
 
