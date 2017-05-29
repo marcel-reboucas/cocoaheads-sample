@@ -44,7 +44,7 @@
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(nonnull NSError *)error
 {
-    NSLog(@"FALHOU! MAS QUE DUREZA!");
+    NSLog(@"FALHOU! MAS QUE DUREZA!: Error: %@", error.localizedDescription);
 }
 
 - (void)requestLocationUpdateAsync:(LocationBlock)completionBlock
