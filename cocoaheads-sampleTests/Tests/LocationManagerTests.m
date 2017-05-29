@@ -11,6 +11,8 @@
 #import "ThreadWait.h"
 #import "OCMock.h"
 
+typedef void (^ILMRunBlock)(void);
+
 // Private Category Trick to expose private properties for testing
 @interface LocationManager (Test)
 
@@ -85,16 +87,19 @@
         [cllocationManagerMock stopMocking];
     }
 }
+
+
 // Is this an good unit test ?
-// ADICIONAR LOGICA DE BACKGROUND TEST AQUI
--(void)testRequestLocationSync
+- (void)testRequestLocationSync
 {
-    OCMStub([self.managerMock isAuthorized]).andReturn(YES);
-    CLLocation *location = [self.manager requestLocationUpdateSync];
-    XCTAssertNotNil(location);
+    [self backgroundTest:^{
+        OCMStub([self.managerMock isAuthorized]).andReturn(YES);
+        CLLocation *location = [self.manager requestLocationUpdateSync];
+        XCTAssertNotNil(location);
+    }];
 }
 
--(void)testRequestLocationSync_MockingManager
+- (void)testRequestLocationSync_MockingManager
 {
     //Grant permision
     OCMStub([self.managerMock isAuthorized]).andReturn(YES);
@@ -117,6 +122,21 @@
     
     CLLocation *location = [self.managerMock requestLocationUpdateSync];
     XCTAssertEqualObjects(testLocation,location);
+}
+
+// Auxiliar method
+- (void)backgroundTest:(ILMRunBlock)block
+{
+    __block BOOL finishTest = NO;
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
+    dispatch_async(queue, ^{
+        block();
+        finishTest = YES;
+    });
+    
+    while (!finishTest) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
+    }
 }
 
 @end

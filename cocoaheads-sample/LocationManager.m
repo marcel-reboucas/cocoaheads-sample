@@ -124,7 +124,7 @@
     }
 }
 
--(BOOL)isAuthorized
+- (BOOL)isAuthorized
 {
     CLAuthorizationStatus status = [self authorizationStatus];
     return status == kCLAuthorizationStatusAuthorizedAlways ||
