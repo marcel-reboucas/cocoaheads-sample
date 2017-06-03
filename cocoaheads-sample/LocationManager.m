@@ -31,21 +31,34 @@
     return self;
 }
 
+#pragma mark - CLLocationManagerDelegate
+
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     if (locations.count > 0) {
         self.lastLocation = locations.firstObject;
-        [self.locationListener receivedLocation:self.lastLocation];
+        [self.delegate receivedLocation:self.lastLocation error:nil];
     }
-    if (self.waiter != nil){
+    
+    if (self.waiter != nil) {
         [self.waiter stopWait];
+        self.waiter = nil;
     }
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(nonnull NSError *)error
 {
     NSLog(@"FALHOU! MAS QUE DUREZA!: Error: %@", error.localizedDescription);
+    
+    [self.delegate receivedLocation:nil error:error];
+    
+    if (self.waiter != nil) {
+        [self.waiter stopWait];
+        self.waiter = nil;
+    }
 }
+
+#pragma mark - Request Location
 
 - (void)requestLocationUpdateAsync:(LocationBlock)completionBlock
 {
@@ -61,7 +74,7 @@
         self.waiter = [[ThreadWait alloc] initDefault];
         [self.manager requestLocation];
         [self.waiter wait];
-        self.waiter = nil;
+        
         if (completionBlock) {
             completionBlock(self.lastLocation);
         }
@@ -73,12 +86,29 @@
     if (![self isAuthorized]) {
         return nil;
     }
+    
     // mockable init
     self.waiter = [[ThreadWait alloc] initDefault];
     [self.manager requestLocation];
     [self.waiter wait];
-    self.waiter = nil;
     return self.lastLocation;
+}
+
+// Using the delegate
+- (void)requestLocationUpdateAsyncDelegate
+{
+    if (![self isAuthorized]) {
+        return;
+    }
+    
+    [self.manager requestLocation];
+}
+
+- (BOOL)isAuthorized
+{
+    CLAuthorizationStatus status = [self authorizationStatus];
+    return status == kCLAuthorizationStatusAuthorizedAlways ||
+    status == kCLAuthorizationStatusAuthorizedWhenInUse;
 }
 
 // *************************
@@ -117,18 +147,9 @@
             return @"Authorized Always";
         case kCLAuthorizationStatusAuthorizedWhenInUse:
             return @"Authorized When In Use";
-        case kCLAuthorizationStatusRestricted:
-            return @"Not Authorized";
         default:
             return @"Not Authorized";
     }
-}
-
-- (BOOL)isAuthorized
-{
-    CLAuthorizationStatus status = [self authorizationStatus];
-    return status == kCLAuthorizationStatusAuthorizedAlways ||
-    status == kCLAuthorizationStatusAuthorizedWhenInUse;
 }
 
 @end

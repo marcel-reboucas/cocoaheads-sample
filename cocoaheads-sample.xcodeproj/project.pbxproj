@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1F00B9A81EDB00A600345E1D /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F00B9A71EDB00A600345E1D /* LocationManager.m */; };
 		1F00B9AA1EDB01A400345E1D /* LocationManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F00B9A91EDB01A400345E1D /* LocationManagerTests.m */; };
+		1F2264D01EE2E0FA00969206 /* LocationDelegateWithBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2264CF1EE2E0FA00969206 /* LocationDelegateWithBlocks.m */; };
 		1F32A2B31ED4EF8800321CE8 /* ViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F32A2B21ED4EF8800321CE8 /* ViewControllerTests.m */; };
 		1F32A2B61ED4EFFC00321CE8 /* ViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F32A2B51ED4EFFC00321CE8 /* ViewControllerTests.swift */; };
 		1F32A2C41ED4F47E00321CE8 /* AsynchronousTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F32A2C31ED4F47E00321CE8 /* AsynchronousTests.swift */; };
@@ -39,6 +40,8 @@
 		1F00B9A61EDB00A600345E1D /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		1F00B9A71EDB00A600345E1D /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		1F00B9A91EDB01A400345E1D /* LocationManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationManagerTests.m; path = Tests/LocationManagerTests.m; sourceTree = "<group>"; };
+		1F2264CE1EE2E0FA00969206 /* LocationDelegateWithBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationDelegateWithBlocks.h; path = AuxiliarClasses/LocationDelegateWithBlocks.h; sourceTree = "<group>"; };
+		1F2264CF1EE2E0FA00969206 /* LocationDelegateWithBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationDelegateWithBlocks.m; path = AuxiliarClasses/LocationDelegateWithBlocks.m; sourceTree = "<group>"; };
 		1F32A2B21ED4EF8800321CE8 /* ViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewControllerTests.m; path = Tests/ViewControllerTests.m; sourceTree = "<group>"; };
 		1F32A2B41ED4EFFC00321CE8 /* cocoaheads-sampleTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "cocoaheads-sampleTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		1F32A2B51ED4EFFC00321CE8 /* ViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewControllerTests.swift; path = Tests/ViewControllerTests.swift; sourceTree = "<group>"; };
@@ -236,6 +239,8 @@
 			children = (
 				FEF1C6BC1EDC5BE7006C0231 /* Utils.h */,
 				FEF1C6BD1EDC5BE7006C0231 /* Utils.m */,
+				1F2264CE1EE2E0FA00969206 /* LocationDelegateWithBlocks.h */,
+				1F2264CF1EE2E0FA00969206 /* LocationDelegateWithBlocks.m */,
 			);
 			name = "Auxiliar Classes";
 			sourceTree = "<group>";
@@ -389,7 +394,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		77391D53901C1FCAD56E057D /* [CP] Copy Pods Resources */ = {
@@ -419,7 +424,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		DA0FA60563B5DEA02F5AD917 /* [CP] Embed Pods Frameworks */ = {
@@ -458,6 +463,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F32A2B61ED4EFFC00321CE8 /* ViewControllerTests.swift in Sources */,
+				1F2264D01EE2E0FA00969206 /* LocationDelegateWithBlocks.m in Sources */,
 				1F32A2C41ED4F47E00321CE8 /* AsynchronousTests.swift in Sources */,
 				1F32A2B31ED4EF8800321CE8 /* ViewControllerTests.m in Sources */,
 				FEF1C6BE1EDC5BE7006C0231 /* Utils.m in Sources */,

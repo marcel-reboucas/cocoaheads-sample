@@ -13,17 +13,7 @@
 #import "KIF.h"
 #import "Utils.h"
 #import "NameConflictExample.h"
-
-#define WAIT_FOR_AUTHORIZATION \
-CLAuthorizationStatus auth = [CLLocationManager authorizationStatus];\
-CLLocationManager *authManager = [[CLLocationManager alloc] init];    \
-while (auth == kCLAuthorizationStatusNotDetermined) {                 \
-    NSLog(@"Please allow location access");                           \
-    [authManager requestAlwaysAuthorization];                         \
-    [Utils unblockingMainThreadSleep:1 forTestClass:self];            \
-    [tester acknowledgeSystemAlert];                                  \
-    auth = [CLLocationManager authorizationStatus];                   \
-}
+#import "LocationDelegateWithBlocks.h"
 
 // Private Category Trick to expose private properties for testing
 @interface LocationManager (Test)
@@ -35,6 +25,9 @@ while (auth == kCLAuthorizationStatusNotDetermined) {                 \
 - (NSString *)currentAuthorizationNonTestable;
 - (NSString *)currentAuthorizationTestable;
 -(BOOL)isAuthorized;
+// Delegate calls
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations;
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(nonnull NSError *)error;
 
 @end
 
@@ -42,7 +35,7 @@ while (auth == kCLAuthorizationStatusNotDetermined) {                 \
 
 @property (nonatomic, strong) LocationManager *manager;
 @property (nonatomic, strong) LocationManager *managerMock;
-@property (nonatomic, strong) id cllmanager;
+@property (nonatomic, strong) id cllManagerMock;
 
 @end
 
@@ -53,15 +46,15 @@ while (auth == kCLAuthorizationStatusNotDetermined) {                 \
     [super setUp];
     
     self.manager = [[LocationManager alloc] init];
-    self.cllmanager = OCMClassMock([CLLocationManager class]);
+    self.cllManagerMock = OCMClassMock([CLLocationManager class]);
     self.managerMock = OCMPartialMock(self.manager);
 }
 
 - (void)tearDown
 {
-    [self.cllmanager stopMocking];
-    self.cllmanager = nil;
-    [super tearDown];
+    [self.cllManagerMock stopMocking];
+    self.cllManagerMock = nil;
+    [super tearDown];   
 }
 
 - (void)testCurrentAuthorizationTestable
@@ -85,21 +78,12 @@ while (auth == kCLAuthorizationStatusNotDetermined) {                 \
 // The imported class NameCollisionExample.h creates a name collision
 - (void)testCurrentAuthorizationNonTestable
 {
-    id cllocationManagerMock;
+    // However, the authorizationStatus exists in multiple classes.
+    //OCMExpect([self.cllManagerMock authorizationStatus]).andReturn(kCLAuthorizationStatusAuthorizedWhenInUse);
+    // We can't fix - Not even with casts
+    //OCMExpect([(CLLocationManager *)self.cllManagerMock authorizationStatus]).andReturn(kCLAuthorizationStatusAuthorizedWhenInUse);
     
-    @try {
-        // We would need to mock the CLLocationManager class.
-        cllocationManagerMock = OCMClassMock([CLLocationManager class]);
-        
-        // However, the authorizationStatus exists in multiple classes.
-        //OCMExpect([(CLLocationManager *)cllocationManagerMock authorizationStatus]).andReturn(kCLAuthorizationStatusAuthorizedWhenInUse);
-        // We can't fix - Not even with casts
-        //OCMExpect([(CLLocationManager *)cllocationManagerMock authorizationStatus]).andReturn(kCLAuthorizationStatusAuthorizedWhenInUse);
-    
-        //XCTAssertEqualObjects(@"Authorized When In Use", [self.manager currentAuthorizationNonTestable]);
-    } @finally {
-        [cllocationManagerMock stopMocking];
-    }
+    //XCTAssertEqualObjects(@"Authorized When In Use", [self.manager currentAuthorizationNonTestable]);
 }
 
 // Is this an good unit test ?
@@ -115,27 +99,87 @@ while (auth == kCLAuthorizationStatusNotDetermined) {                 \
 
 - (void)testRequestLocationSync_MockingManager
 {
-    //Grant permision
+    //Grants permission
     OCMStub([self.managerMock isAuthorized]).andReturn(YES);
     
-    //Avoid usage of API
-    self.managerMock.manager = self.cllmanager;
-    OCMStub([self.cllmanager requestLocation]).andDo(nil);
+    //Avoids the usage of the default API
+    self.managerMock.manager = self.cllManagerMock;
+    OCMStub([self.cllManagerMock requestLocation]).andDo(nil);
     
-    //Track the threadWait
+    //Tracks the threadWait
     id threadWaitMock = OCMClassMock([ThreadWait class]);
     OCMStub([threadWaitMock alloc]).andReturn(threadWaitMock);
     OCMStub([threadWaitMock initDefault]).andReturn(threadWaitMock);
     
-    //inject location
-    __block CLLocation* testLocation = [[CLLocation alloc] init];
-    void (^block)(NSInvocation*) = ^(NSInvocation *invocation){
-        self.managerMock.lastLocation = testLocation;
+    //Injects the test location
+    __block CLLocation *testLocation = [[CLLocation alloc] init];
+    void (^block)(NSInvocation *) = ^(NSInvocation *invocation) {
+        [self.managerMock locationManager:self.cllManagerMock didUpdateLocations:@[testLocation]];
     };
     OCMStub([threadWaitMock wait]).andDo(block);
     
     CLLocation *location = [self.managerMock requestLocationUpdateSync];
-    XCTAssertEqualObjects(testLocation,location);
+    XCTAssertEqualObjects(testLocation, location);
+}
+
+- (void)testRequestLocationDelegate_success
+{
+    //Grants permission
+    OCMStub([self.managerMock isAuthorized]).andReturn(YES);
+    
+    //Avoids the usage of the default API
+    self.managerMock.manager = self.cllManagerMock;
+    
+    //Injects the test location
+    __block CLLocation *testLocation = [[CLLocation alloc] init];
+    void (^block)(NSInvocation *) = ^(NSInvocation *invocation) {
+        [self.managerMock locationManager:self.cllManagerMock didUpdateLocations:@[testLocation]];
+    };
+    OCMStub([self.cllManagerMock requestLocation]).andDo(block);
+    
+    //Starts the delegate
+    LocationDelegateWithBlocks *testDelegate = [[LocationDelegateWithBlocks alloc] init];
+    testDelegate.receivedLocationBlock = ^(CLLocation *location, NSError *error) {
+        //Asserts
+        XCTAssertEqualObjects(testLocation, location);
+        XCTAssertNil(error);
+        
+        // Could also use a expectation to check if the delegate method is being called.
+    };
+
+    self.managerMock.delegate = testDelegate;
+    
+    [self.managerMock requestLocationUpdateAsyncDelegate];
+}
+
+- (void)testRequestLocationDelegate_error
+{
+    //Grants permission
+    OCMStub([self.managerMock isAuthorized]).andReturn(YES);
+    
+    //Avoids the usage of the default API
+    self.managerMock.manager = self.cllManagerMock;
+    
+    //Injects the test location
+    __block NSError *testError = [[NSError alloc] initWithDomain:NSCocoaErrorDomain code:0 userInfo:nil];
+    void (^block)(NSInvocation *) = ^(NSInvocation *invocation) {
+        [self.managerMock locationManager:self.cllManagerMock didFailWithError:testError];
+    };
+    OCMStub([self.cllManagerMock requestLocation]).andDo(block);
+    
+    //Starts the delegate
+    LocationDelegateWithBlocks *testDelegate = [[LocationDelegateWithBlocks alloc] init];
+    testDelegate.receivedLocationBlock = ^(CLLocation *location, NSError *error) {
+        //Asserts
+        XCTAssertEqualObjects(testError, error);
+        XCTAssertNil(location);
+        
+        // Could also use a expectation to check if the delegate method is being called.
+    };
+    
+    self.managerMock.delegate = testDelegate;
+    
+    [self.managerMock requestLocationUpdateAsyncDelegate];
 }
 
 @end

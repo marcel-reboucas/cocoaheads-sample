@@ -24,7 +24,7 @@
     }
 }
 
-+ (void)fullfillExpectiationOn:(XCTestExpectation *)expectation
++ (void)fullfillExpectationOn:(XCTestExpectation *)expectation
 {
     [expectation fulfill];
 }
@@ -33,7 +33,7 @@
 {
     if (NSThread.isMainThread) {
         XCTestExpectation *sleepExpectation = [testCase expectationWithDescription:@"Sleep"];
-        [self performSelector:@selector(fullfillExpectiationOn:) withObject:sleepExpectation afterDelay:time];
+        [self performSelector:@selector(fullfillExpectationOn:) withObject:sleepExpectation afterDelay:time];
         [testCase waitForExpectationsWithTimeout:(4 * time) handler:nil];
     } else {
         [NSThread sleepForTimeInterval:time];
