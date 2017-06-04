@@ -13,6 +13,6 @@ public class AdPresenter: NSObject {
     static let sharedInstance = AdPresenter()
     
     func presentAd(ad : Ad) {
-        print("Presenting ad of type \(ad.adType)).")
+        print("Presenting ad of type \(ad.adType).")
     }
 }
