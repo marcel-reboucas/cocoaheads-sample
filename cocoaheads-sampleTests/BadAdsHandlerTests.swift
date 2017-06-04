@@ -36,7 +36,8 @@ class BadAdsHandlerTests: XCTestCase {
         // If not mocked, the test is non-deterministic
         BadAdsHandler().showAd()
         
-        // Mock the AdPresenter class
+        // Mock the AdPresenter class, which is a singleton
+        // Singletons can be altered anywhere, possibly making the test fail
         // Verify if the method was called, or if the Ad appeared
     }
 

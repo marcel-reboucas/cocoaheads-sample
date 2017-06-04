@@ -106,42 +106,14 @@
 
 - (BOOL)isAuthorized
 {
-    CLAuthorizationStatus status = [self authorizationStatus];
+    CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
     return status == kCLAuthorizationStatusAuthorizedAlways ||
     status == kCLAuthorizationStatusAuthorizedWhenInUse;
 }
 
-// *************************
-// ** Write testable code **
-// *************************
-
-// Since we deal with location data, we have to know if we are
-// authorized to use location updates. However, OCMock has some
-// problems with the authorizationStatus method and we can't stub it.
-// Also, the method is highly coupled with the data source.
-- (NSString *)currentAuthorizationNonTestable
+- (NSString *)currentAuthorization
 {
     CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
-    
-    switch (status) {
-        case kCLAuthorizationStatusAuthorizedAlways:
-            return @"Authorized Always";
-        case kCLAuthorizationStatusAuthorizedWhenInUse:
-            return @"Authorized When In Use";
-        default:
-            return @"Not Authorized";
-    }
-}
-
-// Sometimes, we need to encapsulate a method to allow the stubing.
-- (CLAuthorizationStatus)authorizationStatus
-{
-    return [CLLocationManager authorizationStatus];
-}
-
-- (NSString *)currentAuthorizationTestable
-{
-    CLAuthorizationStatus status = [self authorizationStatus];
     
     switch (status) {
         case kCLAuthorizationStatusAuthorizedAlways:

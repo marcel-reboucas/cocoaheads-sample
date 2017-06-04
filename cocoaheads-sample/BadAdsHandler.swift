@@ -37,7 +37,8 @@ public class BadAdsHandler {
         
         if (adType != AdType.Unknown) {
             lastAdShowedTime = Date()
-            AdPresenter.sharedInstance.presentAd(adType: adType)
+            let ad = Ad(adType: adType)
+            AdPresenter.sharedInstance.presentAd(ad: ad)
         } else {
             print("No ad available.")
         }

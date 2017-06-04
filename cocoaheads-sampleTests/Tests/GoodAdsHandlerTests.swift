@@ -48,11 +48,11 @@ class GoodAdsHandlerTests: XCTestCase {
         XCTAssertNil(handler.lastAdShowedTime)
     }
     
-    func testShowAd_callPresent() {
+    func testShowAd_verifyCall() {
     
-        var presented = false
-        let presentFunction = { (adType : AdType) -> Void in
-            presented = true
+        var presentedAd : Ad?
+        let presentFunction = { (ad : Ad) -> Void in
+            presentedAd = ad
         }
         
         let dateProvider = FakeDateProvider(hour: 10)
@@ -61,14 +61,15 @@ class GoodAdsHandlerTests: XCTestCase {
         //handler.showAd(presentFunction: AdPresenter.sharedInstance.presentAd)
         handler.showAd(presentFunction: presentFunction)
         
-        XCTAssertTrue(presented)
+        let expectedAd = handler.currentAdType(date: dateProvider.getDate())
+        XCTAssertEqual(expectedAd, presentedAd?.adType)
     }
     
-    func testShowAd_rejectPresent() {
+    func testShowAd_rejectCall() {
         
-        var presented = false
-        let presentFunction = { (adType : AdType) -> Void in
-            presented = true
+        var presentedAd : Ad?
+        let presentFunction = { (ad : Ad) -> Void in
+            presentedAd = ad
         }
         
         let dateProvider = FakeDateProvider(hour: 1)
@@ -76,7 +77,7 @@ class GoodAdsHandlerTests: XCTestCase {
         
         handler.showAd(presentFunction: presentFunction)
         
-        XCTAssertFalse(presented)
+        XCTAssertNil(presentedAd)
     }
 
 }
