@@ -1,5 +1,5 @@
 //
-//  DateHandler.swift
+//  DateProvider.swift
 //  cocoaheads-sample
 //
 //  Created by Marcel de Siqueira Campos Rebouças on 6/4/17.
@@ -8,7 +8,6 @@
 
 import UIKit
 
-class DateHandler: NSObject {
-
-    init (
+protocol DateProvider {
+    func getDate() -> Date
 }

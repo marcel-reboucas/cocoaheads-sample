@@ -34,7 +34,7 @@ public class GoodAdsHandler {
         return AdType.Unknown
     }
     
-    func showAd(presentFunction : ((AdType) -> ())?) {
+    func showAd(presentFunction : ((AdType) -> Void)?) {
         
         let date = dateProvider.getDate()
         let adType = currentAdType(date: date)
@@ -45,10 +45,5 @@ public class GoodAdsHandler {
         } else {
             print("No ad available.")
         }
-    }
-    
-    func fetchAd() {
-        let date = dateProvider.getDate()
-        let adType = currentAdType(date: date)
     }
 }

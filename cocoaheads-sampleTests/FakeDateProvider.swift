@@ -7,3 +7,26 @@
 //
 
 import Foundation
+
+class FakeDateProvider : DateProvider {
+    
+    let date : Date
+    
+    init () {
+        self.date = Date()
+    }
+    
+    init (date : Date) {
+        self.date = date
+    }
+    
+    init (hour : Int) {
+        var components = DateComponents()
+        components.hour = hour
+        self.date = Calendar.current.date(from: components)!
+    }
+    
+    func getDate() -> Date {
+        return date
+    }
+}

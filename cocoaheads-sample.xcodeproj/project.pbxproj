@@ -10,6 +10,21 @@
 		1F00B9A81EDB00A600345E1D /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F00B9A71EDB00A600345E1D /* LocationManager.m */; };
 		1F00B9AA1EDB01A400345E1D /* LocationManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F00B9A91EDB01A400345E1D /* LocationManagerTests.m */; };
 		1F2264D01EE2E0FA00969206 /* LocationDelegateWithBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2264CF1EE2E0FA00969206 /* LocationDelegateWithBlocks.m */; };
+		1F2264D81EE43AFA00969206 /* BadAdsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2264D71EE43AFA00969206 /* BadAdsHandler.swift */; };
+		1F2264DA1EE43B7200969206 /* AdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2264D91EE43B7200969206 /* AdType.swift */; };
+		1F2264DD1EE43EDC00969206 /* BadAdsHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2264DC1EE43EDC00969206 /* BadAdsHandlerTests.swift */; };
+		1F2264DE1EE4412100969206 /* BadAdsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2264D71EE43AFA00969206 /* BadAdsHandler.swift */; };
+		1F2264DF1EE4418D00969206 /* AdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2264D91EE43B7200969206 /* AdType.swift */; };
+		1F2264E11EE4434600969206 /* GoodAdsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2264E01EE4434600969206 /* GoodAdsHandler.swift */; };
+		1F2264E31EE4441D00969206 /* GoodAdsHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2264E21EE4441D00969206 /* GoodAdsHandlerTests.swift */; };
+		1F2264E41EE4446000969206 /* GoodAdsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2264E01EE4434600969206 /* GoodAdsHandler.swift */; };
+		1F2264E61EE4483000969206 /* AdPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2264E51EE4483000969206 /* AdPresenter.swift */; };
+		1F2264E81EE449AE00969206 /* DateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2264E71EE449AE00969206 /* DateProvider.swift */; };
+		1F2264E91EE44D4400969206 /* DateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2264E71EE449AE00969206 /* DateProvider.swift */; };
+		1F2264EA1EE44D4600969206 /* AdPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2264E51EE4483000969206 /* AdPresenter.swift */; };
+		1F2264ED1EE44E0A00969206 /* FakeDateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2264EC1EE44E0A00969206 /* FakeDateProvider.swift */; };
+		1F2264EF1EE45D2A00969206 /* Ad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2264EE1EE45D2A00969206 /* Ad.swift */; };
+		1F2264F01EE45D4200969206 /* Ad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2264EE1EE45D2A00969206 /* Ad.swift */; };
 		1F32A2B31ED4EF8800321CE8 /* ViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F32A2B21ED4EF8800321CE8 /* ViewControllerTests.m */; };
 		1F32A2B61ED4EFFC00321CE8 /* ViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F32A2B51ED4EFFC00321CE8 /* ViewControllerTests.swift */; };
 		1F32A2C41ED4F47E00321CE8 /* AsynchronousTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F32A2C31ED4F47E00321CE8 /* AsynchronousTests.swift */; };
@@ -42,6 +57,16 @@
 		1F00B9A91EDB01A400345E1D /* LocationManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationManagerTests.m; path = Tests/LocationManagerTests.m; sourceTree = "<group>"; };
 		1F2264CE1EE2E0FA00969206 /* LocationDelegateWithBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationDelegateWithBlocks.h; path = AuxiliarClasses/LocationDelegateWithBlocks.h; sourceTree = "<group>"; };
 		1F2264CF1EE2E0FA00969206 /* LocationDelegateWithBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationDelegateWithBlocks.m; path = AuxiliarClasses/LocationDelegateWithBlocks.m; sourceTree = "<group>"; };
+		1F2264D61EE43AFA00969206 /* cocoaheads-sample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "cocoaheads-sample-Bridging-Header.h"; sourceTree = "<group>"; };
+		1F2264D71EE43AFA00969206 /* BadAdsHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadAdsHandler.swift; sourceTree = "<group>"; };
+		1F2264D91EE43B7200969206 /* AdType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdType.swift; sourceTree = "<group>"; };
+		1F2264DC1EE43EDC00969206 /* BadAdsHandlerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadAdsHandlerTests.swift; sourceTree = "<group>"; };
+		1F2264E01EE4434600969206 /* GoodAdsHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodAdsHandler.swift; sourceTree = "<group>"; };
+		1F2264E21EE4441D00969206 /* GoodAdsHandlerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GoodAdsHandlerTests.swift; path = Tests/GoodAdsHandlerTests.swift; sourceTree = "<group>"; };
+		1F2264E51EE4483000969206 /* AdPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdPresenter.swift; sourceTree = "<group>"; };
+		1F2264E71EE449AE00969206 /* DateProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateProvider.swift; sourceTree = "<group>"; };
+		1F2264EC1EE44E0A00969206 /* FakeDateProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeDateProvider.swift; sourceTree = "<group>"; };
+		1F2264EE1EE45D2A00969206 /* Ad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ad.swift; sourceTree = "<group>"; };
 		1F32A2B21ED4EF8800321CE8 /* ViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewControllerTests.m; path = Tests/ViewControllerTests.m; sourceTree = "<group>"; };
 		1F32A2B41ED4EFFC00321CE8 /* cocoaheads-sampleTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "cocoaheads-sampleTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		1F32A2B51ED4EFFC00321CE8 /* ViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewControllerTests.swift; path = Tests/ViewControllerTests.swift; sourceTree = "<group>"; };
@@ -93,9 +118,66 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F2264D11EE439AB00969206 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				1F00B9A61EDB00A600345E1D /* LocationManager.h */,
+				1F00B9A71EDB00A600345E1D /* LocationManager.m */,
+			);
+			name = Location;
+			sourceTree = "<group>";
+		};
+		1F2264D31EE439C500969206 /* Ads */ = {
+			isa = PBXGroup;
+			children = (
+				1F2264D51EE43A9900969206 /* Good */,
+				1F2264D41EE43A9400969206 /* Bad */,
+				1F2264D91EE43B7200969206 /* AdType.swift */,
+				1F2264E51EE4483000969206 /* AdPresenter.swift */,
+				1F2264E71EE449AE00969206 /* DateProvider.swift */,
+				1F2264EE1EE45D2A00969206 /* Ad.swift */,
+			);
+			name = Ads;
+			sourceTree = "<group>";
+		};
+		1F2264D41EE43A9400969206 /* Bad */ = {
+			isa = PBXGroup;
+			children = (
+				1F2264D71EE43AFA00969206 /* BadAdsHandler.swift */,
+			);
+			name = Bad;
+			sourceTree = "<group>";
+		};
+		1F2264D51EE43A9900969206 /* Good */ = {
+			isa = PBXGroup;
+			children = (
+				1F2264E01EE4434600969206 /* GoodAdsHandler.swift */,
+			);
+			name = Good;
+			sourceTree = "<group>";
+		};
+		1F2264DB1EE43EB100969206 /* Ads */ = {
+			isa = PBXGroup;
+			children = (
+				1F2264EB1EE44DF500969206 /* Utils */,
+				1F2264DC1EE43EDC00969206 /* BadAdsHandlerTests.swift */,
+				1F2264E21EE4441D00969206 /* GoodAdsHandlerTests.swift */,
+			);
+			name = Ads;
+			sourceTree = "<group>";
+		};
+		1F2264EB1EE44DF500969206 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				1F2264EC1EE44E0A00969206 /* FakeDateProvider.swift */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
 		1F32A2B71ED4F00500321CE8 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				1F2264DB1EE43EB100969206 /* Ads */,
 				1F32A2B21ED4EF8800321CE8 /* ViewControllerTests.m */,
 				1F32A2B51ED4EFFC00321CE8 /* ViewControllerTests.swift */,
 				1F32A2C31ED4F47E00321CE8 /* AsynchronousTests.swift */,
@@ -141,10 +223,10 @@
 		1F32A2C21ED4F18900321CE8 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1F2264D31EE439C500969206 /* Ads */,
+				1F2264D11EE439AB00969206 /* Location */,
 				1FBD0E1A1ED4EDB4006C32F6 /* ViewController.h */,
 				1FBD0E1B1ED4EDB4006C32F6 /* ViewController.m */,
-				1F00B9A61EDB00A600345E1D /* LocationManager.h */,
-				1F00B9A71EDB00A600345E1D /* LocationManager.m */,
 				E22342F01EDC774C008DCC97 /* NameConflictExample.h */,
 				E22342F11EDC774C008DCC97 /* NameConflictExample.m */,
 			);
@@ -186,6 +268,7 @@
 		1FBD0E141ED4EDB4006C32F6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1F2264D61EE43AFA00969206 /* cocoaheads-sample-Bridging-Header.h */,
 				1FBD0E171ED4EDB4006C32F6 /* AppDelegate.h */,
 				1FBD0E181ED4EDB4006C32F6 /* AppDelegate.m */,
 				1FBD0E251ED4EDB4006C32F6 /* Info.plist */,
@@ -301,6 +384,7 @@
 					1FBD0E101ED4EDB4006C32F6 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = RHUME8DLWX;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 					1FBD0E291ED4EDB4006C32F6 = {
@@ -450,10 +534,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE751BA61ED8C53000C142C6 /* ThreadWait.m in Sources */,
+				1F2264D81EE43AFA00969206 /* BadAdsHandler.swift in Sources */,
 				1FBD0E1C1ED4EDB4006C32F6 /* ViewController.m in Sources */,
 				1FBD0E191ED4EDB4006C32F6 /* AppDelegate.m in Sources */,
 				1FBD0E161ED4EDB4006C32F6 /* main.m in Sources */,
+				1F2264E81EE449AE00969206 /* DateProvider.swift in Sources */,
+				1F2264E11EE4434600969206 /* GoodAdsHandler.swift in Sources */,
 				1F00B9A81EDB00A600345E1D /* LocationManager.m in Sources */,
+				1F2264EF1EE45D2A00969206 /* Ad.swift in Sources */,
+				1F2264E61EE4483000969206 /* AdPresenter.swift in Sources */,
+				1F2264DA1EE43B7200969206 /* AdType.swift in Sources */,
 				E22342F21EDC774C008DCC97 /* NameConflictExample.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -462,12 +552,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F2264E31EE4441D00969206 /* GoodAdsHandlerTests.swift in Sources */,
+				1F2264DD1EE43EDC00969206 /* BadAdsHandlerTests.swift in Sources */,
 				1F32A2B61ED4EFFC00321CE8 /* ViewControllerTests.swift in Sources */,
 				1F2264D01EE2E0FA00969206 /* LocationDelegateWithBlocks.m in Sources */,
+				1F2264DF1EE4418D00969206 /* AdType.swift in Sources */,
+				1F2264DE1EE4412100969206 /* BadAdsHandler.swift in Sources */,
 				1F32A2C41ED4F47E00321CE8 /* AsynchronousTests.swift in Sources */,
 				1F32A2B31ED4EF8800321CE8 /* ViewControllerTests.m in Sources */,
+				1F2264F01EE45D4200969206 /* Ad.swift in Sources */,
+				1F2264EA1EE44D4600969206 /* AdPresenter.swift in Sources */,
 				FEF1C6BE1EDC5BE7006C0231 /* Utils.m in Sources */,
 				1F00B9AA1EDB01A400345E1D /* LocationManagerTests.m in Sources */,
+				1F2264ED1EE44E0A00969206 /* FakeDateProvider.swift in Sources */,
+				1F2264E91EE44D4400969206 /* DateProvider.swift in Sources */,
+				1F2264E41EE4446000969206 /* GoodAdsHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -595,11 +694,15 @@
 			baseConfigurationReference = E4DA382D2275A31FBD556AA9 /* Pods-cocoaheads-sample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = RHUME8DLWX;
 				INFOPLIST_FILE = "cocoaheads-sample/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "br.inlocomedia.cocoaheads-sample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "cocoaheads-sample/cocoaheads-sample-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -608,11 +711,14 @@
 			baseConfigurationReference = 50F318392448C2F02D2E799D /* Pods-cocoaheads-sample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = RHUME8DLWX;
 				INFOPLIST_FILE = "cocoaheads-sample/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "br.inlocomedia.cocoaheads-sample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "cocoaheads-sample/cocoaheads-sample-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -620,6 +726,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4A698944E81CE6531D2DF573 /* Pods-cocoaheads-sampleTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = RHUME8DLWX;
@@ -638,6 +745,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 909CDDAFB2B623F4A6982CB5 /* Pods-cocoaheads-sampleTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = RHUME8DLWX;

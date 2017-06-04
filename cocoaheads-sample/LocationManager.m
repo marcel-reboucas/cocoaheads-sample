@@ -118,6 +118,7 @@
 // Since we deal with location data, we have to know if we are
 // authorized to use location updates. However, OCMock has some
 // problems with the authorizationStatus method and we can't stub it.
+// Also, the method is highly coupled with the data source.
 - (NSString *)currentAuthorizationNonTestable
 {
     CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
@@ -132,7 +133,7 @@
     }
 }
 
-// So, sometimes, we need to encapsulate a method to allow the stubing.
+// Sometimes, we need to encapsulate a method to allow the stubing.
 - (CLAuthorizationStatus)authorizationStatus
 {
     return [CLLocationManager authorizationStatus];

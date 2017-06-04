@@ -7,10 +7,39 @@
 //
 
 import Foundation
+import UIKit
 
-class AdsHandler {
-
-    public static func adTypeForTheDay() -> String {
+public class BadAdsHandler {
     
+    var lastAdShowedTime : Date?
+    
+    func currentAdType() -> AdType {
+        
+        let now = Date()
+        let hour = Calendar.current.component(.hour, from: now)
+        
+        if 4...9 ~= hour {
+            return AdType.Coffee
+        } else if 10...14 ~= hour {
+            return AdType.Restaurant
+        } else if 15...21 ~= hour {
+            return AdType.TransportApp
+        } else if 22...23 ~= hour {
+            return AdType.Bed
+        }
+        
+        return AdType.Unknown
+    }
+    
+    func showAd() {
+        
+        let adType = currentAdType()
+        
+        if (adType != AdType.Unknown) {
+            lastAdShowedTime = Date()
+            AdPresenter.sharedInstance.presentAd(adType: adType)
+        } else {
+            print("No ad available.")
+        }
     }
 }

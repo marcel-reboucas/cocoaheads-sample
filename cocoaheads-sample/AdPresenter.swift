@@ -8,6 +8,11 @@
 
 import UIKit
 
-class AdPresenter: NSObject {
+public class AdPresenter: NSObject {
 
+    static let sharedInstance = AdPresenter()
+    
+    func presentAd(adType : AdType) {
+        print("Presenting ad of type \(adType)).")
+    }
 }

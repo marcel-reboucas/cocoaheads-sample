@@ -10,26 +10,73 @@ import XCTest
 
 class GoodAdsHandlerTests: XCTestCase {
     
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    func testAdTypeForTheCurrentHour_6AM_returnsCoffee() {
+        // Now the test is deterministic
+        let dateProvider = FakeDateProvider(hour: 6)
+        let handler = GoodAdsHandler(dateProvider: dateProvider)
+        let adType = handler.currentAdType(date: dateProvider.getDate())
+        
+        XCTAssertEqual(adType, AdType.Coffee)
     }
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
+    func testAdTypeForTheCurrentHour_1PM_returnsRestaurant() {
+        // Now the test is deterministic
+        let dateProvider = FakeDateProvider(hour: 13)
+        let handler = GoodAdsHandler(dateProvider: dateProvider)
+        let adType = handler.currentAdType(date: dateProvider.getDate())
+        
+        XCTAssertEqual(adType, AdType.Restaurant)
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testLastAdShowedSet_1PM() {
+        
+        let dateProvider = FakeDateProvider(hour: 13)
+        let handler = GoodAdsHandler(dateProvider: dateProvider)
+        
+        handler.showAd(presentFunction: nil)
+        
+        XCTAssertEqual(dateProvider.getDate(), handler.lastAdShowedTime)
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    func testLastAdShowedSet_1AM() {
+        
+        let dateProvider = FakeDateProvider(hour: 1)
+        let handler = GoodAdsHandler(dateProvider: dateProvider)
+        
+        handler.showAd(presentFunction: nil)
+        
+        XCTAssertNil(handler.lastAdShowedTime)
+    }
+    
+    func testShowAd_callPresent() {
+    
+        var presented = false
+        let presentFunction = { (adType : AdType) -> Void in
+            presented = true
         }
+        
+        let dateProvider = FakeDateProvider(hour: 10)
+        let handler = GoodAdsHandler(dateProvider: dateProvider)
+        
+        //handler.showAd(presentFunction: AdPresenter.sharedInstance.presentAd)
+        handler.showAd(presentFunction: presentFunction)
+        
+        XCTAssertTrue(presented)
     }
     
+    func testShowAd_rejectPresent() {
+        
+        var presented = false
+        let presentFunction = { (adType : AdType) -> Void in
+            presented = true
+        }
+        
+        let dateProvider = FakeDateProvider(hour: 1)
+        let handler = GoodAdsHandler(dateProvider: dateProvider)
+        
+        handler.showAd(presentFunction: presentFunction)
+        
+        XCTAssertFalse(presented)
+    }
+
 }

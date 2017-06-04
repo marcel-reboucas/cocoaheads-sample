@@ -10,26 +10,34 @@ import XCTest
 
 class BadAdsHandlerTests: XCTestCase {
     
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    func testAdTypeForTheCurrentHour_6AM_returnsCoffee() {
+        // Mock the Date class
+        // If not mocked, the test is non-deterministic
+        let adType = BadAdsHandler().currentAdType()
+        XCTAssertEqual(adType, AdType.Coffee)
     }
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
+    func testLastAdShowedSet_6AM() {
+        // Mock the Date class and pass the mocked date
+        let mockedDate = Date()
+        
+        // If not mocked, the test is non-deterministic
+        let handler = BadAdsHandler()
+            
+        handler.showAd()
+        
+        // Assert that the time is right
+        XCTAssertEqual(handler.lastAdShowedTime, mockedDate)
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
+    func testShowAd_6AM_showsAd() {
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+        // Mock the date class
+        // If not mocked, the test is non-deterministic
+        BadAdsHandler().showAd()
+        
+        // Mock the AdPresenter class
+        // Verify if the method was called, or if the Ad appeared
     }
-    
+
 }

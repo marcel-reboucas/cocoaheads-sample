@@ -7,3 +7,12 @@
 //
 
 import Foundation
+
+public class Ad : NSObject {
+
+    let adType : AdType
+    
+    init(adType : AdType) {
+        self.adType = adType
+    }
+}

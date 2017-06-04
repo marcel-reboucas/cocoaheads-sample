@@ -7,3 +7,11 @@
 //
 
 import Foundation
+
+public enum AdType {
+    case Coffee
+    case Restaurant
+    case TransportApp
+    case Bed
+    case Unknown
+}
