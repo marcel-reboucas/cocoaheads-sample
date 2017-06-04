@@ -13,8 +13,10 @@ class BadAdsHandlerTests: XCTestCase {
     func testAdTypeForTheCurrentHour_6AM_returnsCoffee() {
         // Mock the Date class
         // If not mocked, the test is non-deterministic
-        let adType = BadAdsHandler().currentAdType()
+        let adType = BadAdsHandler.currentAdType()
         XCTAssertEqual(adType, AdType.Coffee)
+        
+        // Remember to unmock Date
     }
     
     func testLastAdShowedSet_6AM() {

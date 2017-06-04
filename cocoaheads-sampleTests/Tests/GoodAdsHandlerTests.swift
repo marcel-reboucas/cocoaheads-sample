@@ -13,8 +13,7 @@ class GoodAdsHandlerTests: XCTestCase {
     func testAdTypeForTheCurrentHour_6AM_returnsCoffee() {
         // Now the test is deterministic
         let dateProvider = FakeDateProvider(hour: 6)
-        let handler = GoodAdsHandler(dateProvider: dateProvider)
-        let adType = handler.currentAdType(date: dateProvider.getDate())
+        let adType = GoodAdsHandler.currentAdType(date: dateProvider.getDate())
         
         XCTAssertEqual(adType, AdType.Coffee)
     }
@@ -22,8 +21,7 @@ class GoodAdsHandlerTests: XCTestCase {
     func testAdTypeForTheCurrentHour_1PM_returnsRestaurant() {
         // Now the test is deterministic
         let dateProvider = FakeDateProvider(hour: 13)
-        let handler = GoodAdsHandler(dateProvider: dateProvider)
-        let adType = handler.currentAdType(date: dateProvider.getDate())
+        let adType = GoodAdsHandler.currentAdType(date: dateProvider.getDate())
         
         XCTAssertEqual(adType, AdType.Restaurant)
     }
@@ -61,7 +59,7 @@ class GoodAdsHandlerTests: XCTestCase {
         //handler.showAd(presentFunction: AdPresenter.sharedInstance.presentAd)
         handler.showAd(presentFunction: presentFunction)
         
-        let expectedAd = handler.currentAdType(date: dateProvider.getDate())
+        let expectedAd = GoodAdsHandler.currentAdType(date: dateProvider.getDate())
         XCTAssertEqual(expectedAd, presentedAd?.adType)
     }
     

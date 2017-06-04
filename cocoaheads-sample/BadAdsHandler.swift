@@ -13,7 +13,7 @@ public class BadAdsHandler {
     
     var lastAdShowedTime : Date?
     
-    func currentAdType() -> AdType {
+    class func currentAdType() -> AdType {
         
         let now = Date()
         let hour = Calendar.current.component(.hour, from: now)
@@ -33,7 +33,7 @@ public class BadAdsHandler {
     
     func showAd() {
         
-        let adType = currentAdType()
+        let adType = BadAdsHandler.currentAdType()
         
         if (adType != AdType.Unknown) {
             lastAdShowedTime = Date()

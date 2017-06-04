@@ -18,7 +18,7 @@ public class GoodAdsHandler {
         self.dateProvider = dateProvider
     }
     
-    func currentAdType(date : Date) -> AdType {
+    class func currentAdType(date : Date) -> AdType {
         let hour = Calendar.current.component(.hour, from: date)
         
         if 4...9 ~= hour {
@@ -37,7 +37,7 @@ public class GoodAdsHandler {
     func showAd(presentFunction : ((Ad) -> Void)?) {
         
         let date = dateProvider.getDate()
-        let adType = currentAdType(date: date)
+        let adType = GoodAdsHandler.currentAdType(date: date)
         
         if (adType != AdType.Unknown) {
             lastAdShowedTime = date
