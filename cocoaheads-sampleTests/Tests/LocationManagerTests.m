@@ -12,7 +12,6 @@
 #import "OCMock.h"
 #import "KIF.h"
 #import "Utils.h"
-#import "NameConflictExample.h"
 #import "LocationDelegateWithBlocks.h"
 
 // Private Category Trick to expose private properties for testing
@@ -22,9 +21,8 @@
 @property (strong, nonatomic) CLLocation *lastLocation;
 @property (strong, nonatomic) ThreadWait *waiter;
 - (CLAuthorizationStatus)authorizationStatus;
-- (NSString *)currentAuthorizationNonTestable;
-- (NSString *)currentAuthorizationTestable;
--(BOOL)isAuthorized;
+- (NSString *)currentAuthorization;
+- (BOOL)isAuthorized;
 // Delegate calls
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations;
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(nonnull NSError *)error;
@@ -59,31 +57,20 @@
 
 - (void)testCurrentAuthorizationTestable
 {
-    OCMExpect([self.managerMock authorizationStatus]).andReturn(kCLAuthorizationStatusAuthorizedWhenInUse);
-    XCTAssertEqualObjects(@"Authorized When In Use", [self.managerMock currentAuthorizationTestable]);
+    OCMExpect([self.cllManagerMock authorizationStatus]).andReturn(kCLAuthorizationStatusAuthorizedWhenInUse);
+    XCTAssertEqualObjects(@"Authorized When In Use", [self.manager currentAuthorization]);
     
-    OCMExpect([self.managerMock authorizationStatus]).andReturn(kCLAuthorizationStatusAuthorizedAlways);
-    XCTAssertEqualObjects(@"Authorized Always", [self.managerMock currentAuthorizationTestable]);
+    OCMExpect([self.cllManagerMock authorizationStatus]).andReturn(kCLAuthorizationStatusAuthorizedAlways);
+    XCTAssertEqualObjects(@"Authorized Always", [self.manager currentAuthorization]);
     
-    OCMExpect([self.managerMock authorizationStatus]).andReturn(kCLAuthorizationStatusRestricted);
-    XCTAssertEqualObjects(@"Not Authorized", [self.managerMock currentAuthorizationTestable]);
+    OCMExpect([self.cllManagerMock authorizationStatus]).andReturn(kCLAuthorizationStatusRestricted);
+    XCTAssertEqualObjects(@"Not Authorized", [self.manager currentAuthorization]);
     
-    OCMExpect([self.managerMock authorizationStatus]).andReturn(kCLAuthorizationStatusDenied);
-    XCTAssertEqualObjects(@"Not Authorized", [self.managerMock currentAuthorizationTestable]);
+    OCMExpect([self.cllManagerMock authorizationStatus]).andReturn(kCLAuthorizationStatusDenied);
+    XCTAssertEqualObjects(@"Not Authorized", [self.manager currentAuthorization]);
     
-    OCMExpect([self.managerMock authorizationStatus]).andReturn(kCLAuthorizationStatusNotDetermined);
-    XCTAssertEqualObjects(@"Not Authorized", [self.managerMock currentAuthorizationTestable]);
-}
-
-// The imported class NameCollisionExample.h creates a name collision
-- (void)testCurrentAuthorizationNonTestable
-{
-    // However, the authorizationStatus exists in multiple classes.
-    //OCMExpect([self.cllManagerMock authorizationStatus]).andReturn(kCLAuthorizationStatusAuthorizedWhenInUse);
-    // We can't fix - Not even with casts
-    //OCMExpect([(CLLocationManager *)self.cllManagerMock authorizationStatus]).andReturn(kCLAuthorizationStatusAuthorizedWhenInUse);
-    
-    //XCTAssertEqualObjects(@"Authorized When In Use", [self.manager currentAuthorizationNonTestable]);
+    OCMExpect([self.cllManagerMock authorizationStatus]).andReturn(kCLAuthorizationStatusNotDetermined);
+    XCTAssertEqualObjects(@"Not Authorized", [self.manager currentAuthorization]);
 }
 
 // Is this an good unit test ?
