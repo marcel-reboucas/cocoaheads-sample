@@ -28,22 +28,33 @@ class AsynchronousTests : XCTestCase {
         super.tearDown()
     }
     
-    // *************************
-    // ** XCTestExpectation   **
-    // *************************
+    // This test ends before calling the completion handler
+    // This can even make the tearDown to be called before the completion, 
+    // making the next test fail
+    func testSaveDocument_withoutExpectation() {
+        let url = NSURL.fileURL(withPath: path)
+        let document = UIManagedDocument(fileURL: url)
+        var saveSuccess = false
+        
+        // Call the asynchronous method with completion handler
+        document.save(to: url, for: UIDocumentSaveOperation.forCreating, completionHandler: { success in
+            saveSuccess = success
+        })
+
+        XCTAssertTrue(saveSuccess)
+    }
+
     func testSaveDocument() {
         let url = NSURL.fileURL(withPath: path)
         let document = UIManagedDocument(fileURL: url)
+        var saveSuccess = false
         
-        // Declare our expectation
         let readyExpectation = expectation(description: "ready")
         
         // Call the asynchronous method with completion handler
         document.save(to: url, for: UIDocumentSaveOperation.forCreating, completionHandler: { success in
-            // Perform our tests...
-            XCTAssertTrue(success, "saveToURL failed")
             
-            // And fulfill the expectation...
+            saveSuccess = success
             readyExpectation.fulfill()
         })
         
@@ -51,6 +62,8 @@ class AsynchronousTests : XCTestCase {
         waitForExpectations(timeout: 5, handler: { error in
             XCTAssertNil(error, "Error")
         })
+        
+        XCTAssertTrue(saveSuccess)
     }
 }
 
