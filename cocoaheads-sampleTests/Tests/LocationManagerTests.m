@@ -51,7 +51,9 @@
 - (void)tearDown
 {
     [self.cllManagerMock stopMocking];
+    [(OCMockObject *)self.managerMock stopMocking];
     self.cllManagerMock = nil;
+    self.managerMock = nil;
     [super tearDown];   
 }
 
@@ -72,6 +74,8 @@
     OCMExpect([self.cllManagerMock authorizationStatus]).andReturn(kCLAuthorizationStatusNotDetermined);
     XCTAssertEqualObjects(@"Not Authorized", [self.manager currentAuthorization]);
 }
+
+// -------------- Sync example ----------------
 
 // Is this an good unit test ?
 - (void)testRequestLocationSync
@@ -108,6 +112,9 @@
     CLLocation *location = [self.managerMock requestLocationUpdateSync];
     XCTAssertEqualObjects(testLocation, location);
 }
+
+// -------------- Delegate example ----------------
+
 
 - (void)testRequestLocationDelegate_success
 {
