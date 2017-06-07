@@ -18,11 +18,6 @@
 
 @implementation ViewController
 
-// *************************
-// ** Simple viewDidLoad  **
-// ** Obj-C / Swift Tests **
-// *************************
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     

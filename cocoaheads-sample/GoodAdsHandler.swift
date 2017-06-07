@@ -11,7 +11,6 @@ import Foundation
 public class GoodAdsHandler {
     
     var lastAdShowedTime : Date?
-    
     let dateProvider : DateProvider
     
     init (dateProvider : DateProvider) {

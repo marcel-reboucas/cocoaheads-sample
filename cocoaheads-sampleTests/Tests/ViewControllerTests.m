@@ -28,6 +28,7 @@
 
 - (void)setUp
 {
+    [super setUp];
     _myName = @"João";
     _myEmail = @"joao@notanemail.com";
     
@@ -52,6 +53,7 @@
 {
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"name"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"email"];
+    [super tearDown];
 }
 
 @end
