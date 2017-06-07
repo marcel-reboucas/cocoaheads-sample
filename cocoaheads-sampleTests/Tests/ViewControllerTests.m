@@ -19,25 +19,39 @@
 
 @interface ViewControllerTests : XCTestCase
 
+@property NSString *myName;
+@property NSString *myEmail;
+
 @end
 
 @implementation ViewControllerTests
 
-// *************************
-// ** Simple XCTest usage **
-// *************************
+- (void)setUp
+{
+    _myName = @"João";
+    _myEmail = @"joao@notanemail.com";
+    
+    [[NSUserDefaults standardUserDefaults] setObject:_myName forKey:@"name"];
+    [[NSUserDefaults standardUserDefaults] setObject:_myEmail forKey:@"email"];
+}
 
 - (void)testViewDidLoad_SetsLabels_Always
 {
-    NSString *name = @"Andy";
-    NSString *email = @"andyo@notanemail.com";
-    [[NSUserDefaults standardUserDefaults] setObject:name forKey:@"name"];
-    [[NSUserDefaults standardUserDefaults] setObject:email forKey:@"email"];
-    
+    // Create objects
     ViewController *toTest = [[ViewController alloc] init];
+    
+    // Call the method to be tested
     [toTest viewDidLoad];
-    XCTAssertEqualObjects(name, toTest.nameLabel.text);
-    XCTAssertEqualObjects(email, toTest.emailLabel.text);
+    
+    // Verify
+    XCTAssertEqualObjects(_myName, toTest.nameLabel.text);
+    XCTAssertEqualObjects(_myEmail, toTest.emailLabel.text);
+}
+
+- (void)tearDown
+{
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"name"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"email"];
 }
 
 @end
