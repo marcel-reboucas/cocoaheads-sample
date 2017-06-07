@@ -55,7 +55,7 @@
     [super tearDown];   
 }
 
-- (void)testCurrentAuthorizationTestable
+- (void)testCurrentAuthorization
 {
     OCMExpect([self.cllManagerMock authorizationStatus]).andReturn(kCLAuthorizationStatusAuthorizedWhenInUse);
     XCTAssertEqualObjects(@"Authorized When In Use", [self.manager currentAuthorization]);
